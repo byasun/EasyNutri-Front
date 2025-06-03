@@ -34,18 +34,29 @@ export default function QuizPage({ onFinish }) {
               <h2 className="Titulo">PLANO DE NUTRIÇÃO PERSONALIZADO</h2>
               <h3 className="Subtitulo">Segundo seus objetivos e metas de saúde de acordo com seus dados e necessidades.</h3>
               <h3 className="tempo">Menos de 5 minutos</h3>
-              <h2 className="titulo">SELECIONE SEU GÊNERO</h2>
+              <div className="barrinha">
+                <div className="b1"></div>
+                <div className="b2"></div>
+                <div className="b3"></div>
+                <div className="b4"></div>
+
+              </div>
+              <h2 className="Titulo">SELECIONE SEU GÊNERO</h2>
             </div>
             <div id="divbotao">
               <button className="botaosexomen" onClick={() => { handleChange("sexo", "homem"); nextStep(); }}>
-                <img src="/imagens/icone-homem.svg" alt="Homem" className="icone-sexo" />
+                <img className="pessoabotao" src="/imagens/botaohomem.svg" />
                  <div className="linha-botao">
                   <span className="textobotao">Masculino</span>
-                  <FaChevronRight className="iconeseta" />
+                  <FaChevronRight className="iconseta" />
                 </div>
               </button>
               <button className="botaosexwoman" onClick={() => { handleChange("sexo", "mulher"); nextStep(); }}>
-                Mulher
+                <img className="pessoabotao" src="/imagens/botaomuie.svg" />
+                 <div className="linha-botao">
+                  <span className="textobotao">Feminino</span>
+                  <FaChevronRight className="iconseta" />
+                </div>
               </button>
             </div>
           </div>

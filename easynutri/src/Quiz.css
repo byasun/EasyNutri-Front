@@ -23,7 +23,7 @@
 .botaosexomen {
   width: 150px;
   height: 250px;
-  background-color: white;
+  background: linear-gradient(to top, #00f2b0 17%, #ffffff 17%);
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -34,26 +34,12 @@
   font-family: sans-serif;
   cursor: pointer;
   padding: 8px;
-}
-
-/* Estilização da imagem dentro do botão */
-.botaosexomen img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  margin-bottom: 4px;
-}
-
-/* Texto "Homem" */
-.botaosexomen span {
-  font-size: 12px;
-  color: #333;
 }
 
 .botaosexwoman {
   width: 150px;
   height: 250px;
-  background-color: white;
+  background: linear-gradient(to top, #00f2b0 17%, #ffffff 17%);
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -64,20 +50,6 @@
   font-family: sans-serif;
   cursor: pointer;
   padding: 8px;
-}
-
-/* Estilização da imagem dentro do botão */
-.botaosexwoman img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  margin-bottom: 4px;
-}
-
-/* Texto "Homem" */
-.botaosexwoman span {
-  font-size: 12px;
-  color: #333;
 }
 
 #divbotao {
@@ -104,4 +76,74 @@
 #divheadline h2,
 #divheadline h3 {
     margin: 0.5rem 0;
+}
+
+.pessoabotao {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.textobotao {
+    font-size: 20px;
+    color: #000000;
+    text-align: center;
+    margin-right: 5px;
+    font-weight: bold;
+}
+.iconseta{
+    color: #000000;
+}
+.Titulo {
+    font-size: 30px;
+    color: #000000;
+}
+.tempo{
+    background-color: #00f2b0;
+    width: 180px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    align-self: center;
+    border-radius: 50px;
+    padding: 0px 10px 4px;
+}
+.barrinha{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.b1{
+    width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 50%, #ffffff 50%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+.b2{
+    width: 50px;
+    height: 10px;
+    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+.b3{
+    width: 50px;
+    height: 10px;
+    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+.b4{
+    width: 50px;
+    height: 10px;
+    border: solid 2px #00f2b0;
+    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
+    border-radius: 3px;
+    margin: 0px 0px 0px 0px;
 }
