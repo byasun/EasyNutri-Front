@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Quiz.css';
 import { FaChevronRight } from "react-icons/fa";
+import { ImGift } from "react-icons/im";
 export default function QuizPage({ onFinish }) {
   const [userData, setUserData] = useState({
     dieta: "",
@@ -58,6 +59,16 @@ export default function QuizPage({ onFinish }) {
                   <FaChevronRight className="iconseta" />
                 </div>
               </button>
+            </div>
+            <div className="textoexp">
+              <div>
+                <div className="linhaexp">
+                  <img className="gift" src="/imagens/Animation - 1749040562880.gif"  />
+                  <h3 className="explicacao">A EasyNutri™ Acaba de Resolver o Seu Problema</h3>
+                </div>
+                <p className="explicacao2">Com o nosso plano de nutrição personalizado, você terá acesso a um cardápio adaptado, planejado por nutricionistas, para atender às suas necessidades e objetivos, tudo isso em menos de 5 minutos!</p>
+                <p className="rodape">Todos os direitos Reservados | EasyNutri™ Copyright 2025</p>
+              </div>
             </div>
           </div>
         );

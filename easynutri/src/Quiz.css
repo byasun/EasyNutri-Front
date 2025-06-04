@@ -68,6 +68,7 @@
 }
 
 #divheadline {
+  width: 100%;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -91,8 +92,14 @@
     margin-right: 5px;
     font-weight: bold;
 }
+.linha-botao{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .iconseta{
     color: #000000;
+    font-size: 18px;
 }
 .Titulo {
     font-size: 30px;
@@ -147,3 +154,41 @@
     border-radius: 3px;
     margin: 0px 0px 0px 0px;
 }
+.textoexp{
+  width: 95%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;;
+}
+.explicacao{
+  font-size: 24px;
+  border-left: solid 4px #00f2b0;
+  width: 75%;
+  padding: 0px 0px 0px 3px;
+}
+.linhaexp{
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  align-items: center;
+}
+.gift{
+  width: 90px;
+  height: 70px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.explicacao2{
+  margin-top: -10px;
+}
+.rodape{
+  align-items: center;
+  display: flex;
+  font-size: 10px;
+  color: #8b8b8b;
+  justify-content: center;
+  margin-top: 50px;
+}
+/*fim da home page*/
+
