@@ -86,6 +86,13 @@ export default function QuizPage({ onFinish }) {
       <div className="divlogocentral">
         <img className="logocentral" src="/imagens/logogrande.svg" alt="Logo" />
       </div>
+      <div className="barrinha">
+          <div className="b1c1"></div>
+          <div className="b2"></div>
+          <div className="b3"></div>
+          <div className="b4"></div>
+
+      </div>
       <div className="titulonrml">
         <h2>Qual tipo de dieta você prefere?</h2>
         <div className="dietabtns">

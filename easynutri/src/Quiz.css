@@ -264,3 +264,11 @@
   font-size: 20px;
   margin-bottom: 6px;
 }
+.b1c1{
+  width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 100%, #ffffff 0%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
