@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Quiz.css';
 import { FaChevronRight } from "react-icons/fa";
 import { ImGift } from "react-icons/im";
@@ -14,7 +14,14 @@ export default function QuizPage({ onFinish }) {
     alergias: "",
   });
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(() => {
+  const savedStep = localStorage.getItem("quizStep");
+  return savedStep ? parseInt(savedStep) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("quizStep", step);
+  }, [step]);
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
@@ -33,7 +40,7 @@ export default function QuizPage({ onFinish }) {
               </div>
             <div id="divheadline">
               <h2 className="Titulo">PLANO DE NUTRIÇÃO PERSONALIZADO</h2>
-              <h3 className="Subtitulo">Segundo seus objetivos e metas de saúde de acordo com seus dados e necessidades.</h3>
+              <h3 className="Subtitulo">Segundo seus objetivos e metas de saúde, de acordo com seus dados e necessidades.</h3>
               <h3 className="tempo">Menos de 5 minutos</h3>
               <div className="barrinha">
                 <div className="b1"></div>
@@ -67,34 +74,91 @@ export default function QuizPage({ onFinish }) {
                   <h3 className="explicacao">A EasyNutri™ Acaba de Resolver o Seu Problema</h3>
                 </div>
                 <p className="explicacao2">Com o nosso plano de nutrição personalizado, você terá acesso a um cardápio adaptado, planejado por nutricionistas, para atender às suas necessidades e objetivos, tudo isso em menos de 5 minutos!</p>
-                <p className="rodape">Todos os direitos Reservados | EasyNutri™ Copyright 2025</p>
+                <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
               </div>
             </div>
           </div>
         );
 
       case 1:
-        return (
-          <div>
-            <h2>Qual sua dieta?</h2>
-            <input
-              type="text"
-              placeholder="Digite sua dieta"
-              value={userData.dieta}
-              onChange={(e) => handleChange("dieta", e.target.value)}
-            />
-            <div style={{ marginTop: 20 }}>
-              <button onClick={prevStep}>Voltar</button>
-              <button
-                onClick={nextStep}
-                disabled={!userData.dieta.trim()}
-                style={{ marginLeft: 10 }}
-              >
-                Próximo
-              </button>
-            </div>
-          </div>
-        );
+  return (
+    <div className="divquestion1">
+      <div className="divlogocentral">
+        <img className="logocentral" src="/imagens/logogrande.svg" alt="Logo" />
+      </div>
+      <div className="titulonrml">
+        <h2>Qual tipo de dieta você prefere?</h2>
+        <div className="dietabtns">
+  {[
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "Low Carb",
+      descricao: "Reduz carboidratos para acelerar a queima de gordura.",
+    },
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "Cetogênica",
+      descricao: "Alta em gorduras e muito baixa em carboidratos.",
+    },
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "Mediterrânea",
+      descricao: "Baseada em alimentos frescos, azeite e peixes.",
+    },
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "Vegetariana",
+      descricao: "Exclui carnes, focando em vegetais e grãos, inclui ovos e derivados de leite.",
+    },
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "Vegana",
+      descricao: "Sem qualquer produto de origem animal.",
+    },
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "Dieta Flexível",
+      descricao: "Permite variedade com foco em equilíbrio calórico.",
+    },
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "Paleolítica",
+      descricao: "Inspirada na alimentação dos nossos ancestrais.",
+    },
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "DASH",
+      descricao: "Focada na redução da pressão arterial.",
+    },
+    {
+      img: "/imagens/botaohomem.svg",
+      nome: "Não tenho certeza",
+      descricao: "Ajude-me a escolher com base no meu perfil.",
+    },
+  ].map(({ nome, descricao, img }) => (
+    <button
+      className="btndieta"
+      key={nome}
+      onClick={() => {
+        handleChange("dieta", nome);
+        console.log("Dados atuais do usuário:", { ...userData, dieta: nome });
+        nextStep();
+      }}
+    >
+      <div className="tituloedesc">
+        <img className="imagemdieta" src={img}></img>
+        <div className="desctitu">
+          <div className="titulo-dieta">{nome}</div>
+          <div className="descricao-dieta">{descricao}</div>
+        </div>
+      </div>
+    </button>
+  ))}
+</div>
+
+      </div>
+    </div>
+  );
 
       case 2:
         return (
