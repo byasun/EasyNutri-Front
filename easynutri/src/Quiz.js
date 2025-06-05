@@ -98,47 +98,47 @@ export default function QuizPage({ onFinish }) {
         <div className="dietabtns">
   {[
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/Animation - 1749142869912.gif",
       nome: "Low Carb",
       descricao: "Reduz carboidratos para acelerar a queima de gordura.",
     },
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/Animation - 1749143230081.gif",
       nome: "Cetogênica",
       descricao: "Alta em gorduras e muito baixa em carboidratos.",
     },
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/Animation - 1749142051509.gif",
       nome: "Mediterrânea",
       descricao: "Baseada em alimentos frescos, azeite e peixes.",
     },
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/Animation - 1749132322980.gif",
       nome: "Vegetariana",
       descricao: "Exclui carnes, focando em vegetais e grãos, inclui ovos e derivados de leite.",
     },
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/embreve.png",
       nome: "Vegana",
-      descricao: "Sem qualquer produto de origem animal.",
+      descricao: "EM BREVE!! Sem qualquer produto de origem animal.",
     },
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/embreve.png",
       nome: "Dieta Flexível",
-      descricao: "Permite variedade com foco em equilíbrio calórico.",
+      descricao: "EM BREVE!! Permite variedade com foco em equilíbrio calórico.",
     },
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/embreve.png",
       nome: "Paleolítica",
-      descricao: "Inspirada na alimentação dos nossos ancestrais.",
+      descricao: "EM BREVE!! Inspirada na alimentação dos nossos ancestrais.",
     },
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/embreve.png",
       nome: "DASH",
-      descricao: "Focada na redução da pressão arterial.",
+      descricao: "EM BREVE!! Dieta para controle de pressão arterial.",
     },
     {
-      img: "/imagens/botaohomem.svg",
+      img: "/imagens/Animation - 1749141808625.gif",
       nome: "Não tenho certeza",
       descricao: "Ajude-me a escolher com base no meu perfil.",
     },
@@ -147,10 +147,12 @@ export default function QuizPage({ onFinish }) {
       className="btndieta"
       key={nome}
       onClick={() => {
+        if (nome !== "Vegana" && nome !== "Dieta Flexível" && nome !== "Paleolítica" && nome !== "DASH") {
         handleChange("dieta", nome);
         console.log("Dados atuais do usuário:", { ...userData, dieta: nome });
         nextStep();
       }}
+    }
     >
       <div className="tituloedesc">
         <img className="imagemdieta" src={img}></img>
@@ -169,20 +171,29 @@ export default function QuizPage({ onFinish }) {
 
       case 2:
         return (
-          <div>
-            <h2>Qual seu peso? (kg)</h2>
-            <input
+          <div className="divquestion2">
+            <div className="divlogocentral">
+              <img className="logo" src="/imagens/logogrande.svg" alt="Logo" />
+            </div>
+            <div className="barrinha">
+              <div className="b1c1"></div>
+              <div className="b2mp"></div>
+              <div className="b3"></div>
+              <div className="b4"></div>
+            </div>
+            <h2 className="Titulo">Qual seu peso? (kg)</h2>
+            <input className="placeholder"
               type="number"
               placeholder="Digite seu peso"
               value={userData.peso}
-              onChange={(e) => handleChange("peso", e.target.value)}
+              onChange={(e) => handleChange("peso", Number(e.target.value))}
             />
-            <div style={{ marginTop: 20 }}>
-              <button onClick={prevStep}>Voltar</button>
-              <button
+            <div className="botoesirevir">
+              <button className="btnirevir" onClick={prevStep}>Voltar</button>
+              <button className="btnirevir"
                 onClick={nextStep}
-                disabled={!userData.peso.trim()}
-                style={{ marginLeft: 10 }}
+                disabled={!userData.peso || userData.peso <= 0}
+                
               >
                 Próximo
               </button>
@@ -192,50 +203,73 @@ export default function QuizPage({ onFinish }) {
       
       case 3:
         return (
-          <div>
-            <h2>Qual sua altura? (cm)</h2>
-            <input
+          <div className="divquestion2">
+            <div className="divlogocentral">
+              <img className="logo" src="/imagens/logogrande.svg" alt="Logo" />
+            </div>
+            <div className="barrinha">
+              <div className="b1c1"></div>
+              <div className="b2tp"></div>
+              <div className="b3"></div>
+              <div className="b4"></div>
+            </div>
+            <h2 className="Titulo">Qual a sua altura? (Metros)</h2>
+            <input className="placeholder"
               type="number"
               placeholder="Digite sua altura"
               value={userData.altura}
-              onChange={(e) => handleChange("altura", e.target.value)}
+              onChange={(e) => {
+                handleChange("altura", Number(e.target.value))
+                console.log("Dados atuais do usuário:", { ...userData, altura: Number(e.target.value) });
+              }}
             />
-            <div style={{ marginTop: 20 }}>
-              <button onClick={prevStep}>Voltar</button>
-              <button
+            <div className="botoesirevir">
+              <button className="btnirevir" onClick={prevStep}>Voltar</button>
+              <button className="btnirevir"
                 onClick={nextStep}
-                disabled={!userData.altura.trim()}
-                style={{ marginLeft: 10 }}
+                disabled={!userData.altura || userData.altura <= 0}
+                
               >
                 Próximo
               </button>
             </div>
           </div>
         );
-      
       case 4:
         return (
-          <div>
-            <h2>Qual sua idade?</h2>
-            <input
+          <div className="divquestion2">
+            <div className="divlogocentral">
+              <img className="logo" src="/imagens/logogrande.svg" alt="Logo" />
+            </div>
+            <div className="barrinha">
+              <div className="b1c1"></div>
+              <div className="b2tp"></div>
+              <div className="b3mp"></div>
+              <div className="b4"></div>
+            </div>
+            <h2 className="Titulo">Qual a sua idade?</h2>
+            <h3 className="Subtitulo1">Não vale mentir aqui hein</h3>
+            <input className="placeholder"
               type="number"
-              placeholder="Digite sua idade"
+              placeholder="Digite a sua idade"
               value={userData.idade}
-              onChange={(e) => handleChange("idade", e.target.value)}
+              onChange={(e) => {
+                handleChange("idade", Number(e.target.value))
+                console.log("Dados atuais do usuário:", { ...userData, idade: Number(e.target.value) });
+              }}
             />
-            <div style={{ marginTop: 20 }}>
-              <button onClick={prevStep}>Voltar</button>
-              <button
+            <div className="botoesirevir">
+              <button className="btnirevir" onClick={prevStep}>Voltar</button>
+              <button className="btnirevir"
                 onClick={nextStep}
-                disabled={!userData.idade.trim()}
-                style={{ marginLeft: 10 }}
+                disabled={!userData.idade || userData.idade <= 0}
+                
               >
                 Próximo
               </button>
             </div>
           </div>
         );
-      
       case 5:
         return (
           <div>
@@ -250,7 +284,7 @@ export default function QuizPage({ onFinish }) {
               <button onClick={prevStep}>Voltar</button>
               <button
                 onClick={nextStep}
-                disabled={!userData.objetivo.trim()}
+                disabled={!userData.altura || userData.altura <= 0}
                 style={{ marginLeft: 10 }}
               >
                 Próximo

@@ -102,6 +102,9 @@
     font-size: 18px;
 }
 .Titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
     font-size: 30px;
     color: #000000;
 }
@@ -122,38 +125,7 @@
     display: flex;
     justify-content: center;
 }
-.b1{
-    width: 50px;
-    height: 10px;
-   background: linear-gradient(to right, #00f2b0 50%, #ffffff 50%);
-    border-radius: 3px;
-    margin: 0px 5px 0px 0px;
-     border: solid 2px #00f2b0;
-}
-.b2{
-    width: 50px;
-    height: 10px;
-    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
-    border-radius: 3px;
-    margin: 0px 5px 0px 0px;
-     border: solid 2px #00f2b0;
-}
-.b3{
-    width: 50px;
-    height: 10px;
-    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
-    border-radius: 3px;
-    margin: 0px 5px 0px 0px;
-     border: solid 2px #00f2b0;
-}
-.b4{
-    width: 50px;
-    height: 10px;
-    border: solid 2px #00f2b0;
-    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
-    border-radius: 3px;
-    margin: 0px 0px 0px 0px;
-}
+
 .textoexp{
   width: 95%;
   display:flex;
@@ -272,4 +244,180 @@
     border-radius: 3px;
     margin: 0px 5px 0px 0px;
      border: solid 2px #00f2b0;
+}
+
+/* TODOS OS TIPOS DE BARRINHAS*/
+.b1{
+    width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 50%, #ffffff 50%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+.b2{
+    width: 50px;
+    height: 10px;
+    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+.b3{
+    width: 50px;
+    height: 10px;
+    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+.b4{
+    width: 50px;
+    height: 10px;
+    border: solid 2px #00f2b0;
+    background: linear-gradient(to right, #00f2b0 0, #ffffff 0);
+    border-radius: 3px;
+    margin: 0px 0px 0px 0px;
+}
+.b2mp{
+  width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 50%, #ffffff 50%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+
+.b2tp{
+  width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 100%, #ffffff 0%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+
+.b3mp{
+  width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 50%, #ffffff 50%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+
+.b4mp{
+  width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 50%, #ffffff 50%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+
+.b3tp{
+  width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 100%, #ffffff 0%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+
+.b1tp{
+  width: 50px;
+    height: 10px;
+   background: linear-gradient(to right, #00f2b0 100%, #ffffff 0%);
+    border-radius: 3px;
+    margin: 0px 5px 0px 0px;
+     border: solid 2px #00f2b0;
+}
+/* ACABOU OS TIPOS DE BARRINHAS*/
+
+/*Começa o case 2*/
+.placeholder {
+  font-size: 25px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  margin: 0 auto;
+  border: solid 2.5px;
+  border-radius: 5px;
+  height: 45px;
+  color: #000000; /* texto digitado preto */
+  padding-left: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Placeholder preto quando fora de foco */
+.placeholder::placeholder {
+  color: #000000;
+  opacity: 1;
+}
+
+/* Ao focar, só a borda muda de cor, texto e placeholder continuam pretos */
+.placeholder:focus {
+  outline: none;
+  border-color: #00f2b0;
+}
+
+/* Remove as setas dos inputs number */
+.placeholder::-webkit-outer-spin-button,
+.placeholder::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.placeholder[type="number"] {
+  -moz-appearance: textfield;
+}
+.input-wrapper {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.input-wrapper .placeholder {
+  width: 100%;
+  padding-right: 40px; /* espaço para o sufixo */
+}
+
+.input-sufix {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000;
+  font-size: 20px;
+  pointer-events: none;
+}
+.botoesirevir{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+  justify-content: center;
+  margin-top: px;
+  margin: auto;
+}
+.btnirevir{
+  width: 100%;
+  height: 50px;
+  background-color: #00f2b0;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-right: 5px ;
+}
+.Subtitulo1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -25px;
+  color: #8b8b8b;
+  font-weight: 400;
+  font-size: 15px;
 }
