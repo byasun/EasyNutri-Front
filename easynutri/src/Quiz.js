@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import './Quiz.css';
 import { FaChevronRight } from "react-icons/fa";
 import { ImGift } from "react-icons/im";
@@ -18,6 +18,8 @@ export default function QuizPage({ onFinish }) {
   const savedStep = localStorage.getItem("quizStep");
   return savedStep ? parseInt(savedStep) : 0;
   });
+  const [selecionadas, setSelecionadas] = useState([]);
+
 
   useEffect(() => {
     localStorage.setItem("quizStep", step);
@@ -166,6 +168,7 @@ export default function QuizPage({ onFinish }) {
 </div>
 
       </div>
+      <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
     </div>
   );
 
@@ -198,6 +201,7 @@ export default function QuizPage({ onFinish }) {
                 Próximo
               </button>
             </div>
+            <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
           </div>
         );
       
@@ -268,54 +272,463 @@ export default function QuizPage({ onFinish }) {
                 Próximo
               </button>
             </div>
+            <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
           </div>
         );
       case 5:
         return (
-          <div>
-            <h2>Qual seu objetivo?</h2>
-            <input
-              type="text"
-              placeholder="Digite seu objetivo"
-              value={userData.objetivo}
-              onChange={(e) => handleChange("objetivo", e.target.value)}
-            />
-            <div style={{ marginTop: 20 }}>
-              <button onClick={prevStep}>Voltar</button>
-              <button
-                onClick={nextStep}
-                disabled={!userData.altura || userData.altura <= 0}
-                style={{ marginLeft: 10 }}
-              >
-                Próximo
-              </button>
-            </div>
-          </div>
-        );
+    <div className="divquestion1">
+      <div className="divlogocentral">
+        <img className="logocentral" src="/imagens/logogrande.svg" alt="Logo" />
+      </div>
+      <div className="barrinha">
+          <div className="b1c1"></div>
+          <div className="b2tp"></div>
+          <div className="b3tp"></div>
+          <div className="b4"></div>
 
-      case 6:
-        return (
-          <div>
-            <h2>Qual sua preferência alimentar?</h2>
-            <input
-              type="text"
-              placeholder="Digite sua preferência alimentar"
-              value={userData.preferencia}
-              onChange={(e) => handleChange("preferencia", e.target.value)}
-            />
-            <div style={{ marginTop: 20 }}>
-              <button onClick={prevStep}>Voltar</button>
-              <button
-                onClick={nextStep}
-                disabled={!userData.preferencia.trim()}
-                style={{ marginLeft: 10 }}
-              >
-                Próximo
-              </button>
-            </div>
-          </div>
-        );
+      </div>
+      <div className="titulonrml">
+        <h2>Qual o seu objetivo?</h2>
+        <div className="dietabtns">
+  {[
+    {
+      img: "/imagens/Animation - 1749211936355.gif",
+      nome: "Emagrecimento",
+      descricao: "Reduz carboidratos para acelerar a queima de gordura.",
+    },
+    {
+      img: "/imagens/Animation - 1749212342747.gif",
+      nome: "Hipertrofia",
+      descricao: "Alta em gorduras e muito baixa em carboidratos.",
+    },
+  ].map(({ nome, descricao, img }) => (
+    <button
+      className="btndieta"
+      key={nome}
+      onClick={() => {
+        handleChange("objetivo", nome);
+        console.log("Dados atuais do usuário:", { ...userData, objetivo: nome });
+        nextStep();
+      }
+    }
+    >
+      <div className="tituloedesc">
+        <img className="imagemdieta" src={img}></img>
+        <div className="desctitu">
+          <div className="titulo-dieta">{nome}</div>
+          <div className="descricao-dieta">{descricao}</div>
+        </div>
+      </div>
+    </button>
+  ))}
+</div>
 
+      </div>
+      <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
+    </div>
+  );
+case 6: {
+  const proteinas = ["Carne vermelha", "Porco", "Frango", "Peixe", "Frutos do mar", "Ovos",];
+  const carboidratos = ["Macarrão", "Feijão", "Pão", "Batata", "Batata-Doce", "Mandioca", "Milho-Verde", "Tapioca", "Inhame", "Abóbora", "Aveia", "Fubá"];
+  const frutas = ["Banana", "Maçã", "Laranja", "Mamão", "Abacaxi", "Manga", "Uva", "Melancia", "Melão", "Goiaba", "Morango", "Maracujá"];
+  const legumes = ["Cenoura", "Beterraba", "Mandioquinha", "Chuchu", "Abóbora", "Cebola", "Jiló", "Quiabo", "Nabo", "Vagem", "Ervilha", "Maxixe"];
+  const verduras = ["Alface", "Couve", "Repolho", "Rúcula", "Espinafre", "Agrião", "Almeirão", "Brócolis", "Escarola", "Taioba", "Chicória", "Couve-flor"];
+  const outros = ["Leite", "Queijo", "Iogurte", "Manteiga", "Requeijão", "Café", "Chá", "Sucos", "Achocolatado", "Leite condensado", "Creme de leite", "Chocolate"];
+
+
+  const togglePreferencia = (opcao) => {
+    setSelecionadas((prev) =>
+      prev.includes(opcao)
+        ? prev.filter((item) => item !== opcao)
+        : [...prev, opcao]
+    );
+  };
+
+  const confirmarPreferencias = () => {
+    const preferencias = selecionadas.join(",");
+    handleChange("preferencia", preferencias);
+    console.log("Dados atuais do usuário:", { ...userData, preferencia: preferencias });
+    nextStep();
+  };
+
+  return (
+    <div className="divquestion1">
+      <div className="divlogocentral">
+        <img className="logocentral" src="/imagens/logogrande.svg" alt="Logo" />
+      </div>
+      <div className="barrinha">
+        <div className="b1c1"></div>
+        <div className="b2tp"></div>
+        <div className="b3tp"></div>
+        <div className="b4mp"></div>
+      </div>
+      <div className="titulonrml">
+        <h2>O que você🚫não gostaria de comer?</h2>
+      </div>
+
+      <div>
+        <h3 className="titulodivisoria">Proteínas</h3>
+        <div className="grid2">
+          {proteinas.map((opcao) => (
+            <button
+              key={opcao}
+              type="button"
+              className={selecionadas.includes(opcao) ? "preferencia-opcao selecionada" : "preferencia-opcao"}
+              onClick={() => togglePreferencia(opcao)}
+              style={{
+                width: "100%",
+                maxWidth: "250px",
+                minWidth: "180px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "10px",
+                borderRadius: "5px",
+                border: selecionadas.includes(opcao) ? "2px solid #00f2b0" : "1px solid #ccc",
+                background: "#fff",
+                cursor: "pointer"
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "15px",
+                  height: "15px",
+                  borderRadius: "50%",
+                  border: "2px solid #000",
+                  position: "relative",
+                  background: "#fff",
+                  marginRight: "5px",
+                  flexShrink: 0
+                }}
+              >
+                {selecionadas.includes(opcao) && (
+                  <span
+                    style={{
+                      display: "block",
+                      width: "9px",
+                      height: "9px",
+                      background: "#00f2b0",
+                      borderRadius: "50%",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)"
+                    }}
+                  ></span>
+                )}
+              </span>
+              {opcao}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="titulodivisoria">Carboidratos</h3>
+        <div className="grid2">
+          {carboidratos.map((opcao) => (
+            <button
+              key={opcao}
+              type="button"
+              className={selecionadas.includes(opcao) ? "preferencia-opcao selecionada" : "preferencia-opcao"}
+              onClick={() => togglePreferencia(opcao)}
+              style={{
+                width: "100%",
+                maxWidth: "250px",
+                minWidth: "180px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "10px",
+                borderRadius: "5px",
+                border: selecionadas.includes(opcao) ? "2px solid #00f2b0" : "1px solid #ccc",
+                background: "#fff",
+                cursor: "pointer"
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "15px",
+                  height: "15px",
+                  borderRadius: "50%",
+                  border: "2px solid #000",
+                  position: "relative",
+                  background: "#fff",
+                  marginRight: "5px",
+                  flexShrink: 0
+                }}
+              >
+                {selecionadas.includes(opcao) && (
+                  <span
+                    style={{
+                      display: "block",
+                      width: "9px",
+                      height: "9px",
+                      background: "#00f2b0",
+                      borderRadius: "50%",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)"
+                    }}
+                  ></span>
+                )}
+              </span>
+              {opcao}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="titulodivisoria">Frutas</h3>
+        <div className="grid2">
+          {frutas.map((opcao) => (
+            <button
+              key={opcao}
+              type="button"
+              className={selecionadas.includes(opcao) ? "preferencia-opcao selecionada" : "preferencia-opcao"}
+              onClick={() => togglePreferencia(opcao)}
+              style={{
+                width: "100%",
+                maxWidth: "250px",
+                minWidth: "180px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "10px",
+                borderRadius: "5px",
+                border: selecionadas.includes(opcao) ? "2px solid #00f2b0" : "1px solid #ccc",
+                background: "#fff",
+                cursor: "pointer"
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "15px",
+                  height: "15px",
+                  borderRadius: "50%",
+                  border: "2px solid #000",
+                  position: "relative",
+                  background: "#fff",
+                  marginRight: "5px",
+                  flexShrink: 0
+                }}
+              >
+                {selecionadas.includes(opcao) && (
+                  <span
+                    style={{
+                      display: "block",
+                      width: "9px",
+                      height: "9px",
+                      background: "#00f2b0",
+                      borderRadius: "50%",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)"
+                    }}
+                  ></span>
+                )}
+              </span>
+              {opcao}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+            <div>
+        <h3 className="titulodivisoria">Legumes</h3>
+        <div className="grid2">
+          {legumes.map((opcao) => (
+            <button
+              key={opcao}
+              type="button"
+              className={selecionadas.includes(opcao) ? "preferencia-opcao selecionada" : "preferencia-opcao"}
+              onClick={() => togglePreferencia(opcao)}
+              style={{
+                width: "100%",
+                maxWidth: "250px",
+                minWidth: "180px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "10px",
+                borderRadius: "5px",
+                border: selecionadas.includes(opcao) ? "2px solid #00f2b0" : "1px solid #ccc",
+                background: "#fff",
+                cursor: "pointer"
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "15px",
+                  height: "15px",
+                  borderRadius: "50%",
+                  border: "2px solid #000",
+                  position: "relative",
+                  background: "#fff",
+                  marginRight: "5px",
+                  flexShrink: 0
+                }}
+              >
+                {selecionadas.includes(opcao) && (
+                  <span
+                    style={{
+                      display: "block",
+                      width: "9px",
+                      height: "9px",
+                      background: "#00f2b0",
+                      borderRadius: "50%",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)"
+                    }}
+                  ></span>
+                )}
+              </span>
+              {opcao}
+            </button>
+          ))}
+        </div>
+      </div>
+
+            <div>
+        <h3 className="titulodivisoria">Verduras</h3>
+        <div className="grid2">
+          {verduras.map((opcao) => (
+            <button
+              key={opcao}
+              type="button"
+              className={selecionadas.includes(opcao) ? "preferencia-opcao selecionada" : "preferencia-opcao"}
+              onClick={() => togglePreferencia(opcao)}
+              style={{
+                width: "100%",
+                maxWidth: "250px",
+                minWidth: "180px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "10px",
+                borderRadius: "5px",
+                border: selecionadas.includes(opcao) ? "2px solid #00f2b0" : "1px solid #ccc",
+                background: "#fff",
+                cursor: "pointer"
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "15px",
+                  height: "15px",
+                  borderRadius: "50%",
+                  border: "2px solid #000",
+                  position: "relative",
+                  background: "#fff",
+                  marginRight: "5px",
+                  flexShrink: 0
+                }}
+              >
+                {selecionadas.includes(opcao) && (
+                  <span
+                    style={{
+                      display: "block",
+                      width: "9px",
+                      height: "9px",
+                      background: "#00f2b0",
+                      borderRadius: "50%",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)"
+                    }}
+                  ></span>
+                )}
+              </span>
+              {opcao}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="opcoes">
+        <h3 className="titulodivisoria">Outros</h3>
+        <div className="grid2">
+          {outros.map((opcao) => (
+            <button
+              key={opcao}
+              type="button"
+              className={selecionadas.includes(opcao) ? "preferencia-opcao selecionada" : "preferencia-opcao"}
+              onClick={() => togglePreferencia(opcao)}
+              style={{
+                width: "100%",
+                maxWidth: "250px",
+                minWidth: "180px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "10px",
+                borderRadius: "5px",
+                border: selecionadas.includes(opcao) ? "2px solid #00f2b0" : "1px solid #ccc",
+                background: "#fff",
+                cursor: "pointer"
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "15px",
+                  height: "15px",
+                  borderRadius: "50%",
+                  border: "2px solid #000",
+                  position: "relative",
+                  background: "#fff",
+                  marginRight: "5px",
+                  flexShrink: 0
+                }}
+              >
+                {selecionadas.includes(opcao) && (
+                  <span
+                    style={{
+                      display: "block",
+                      width: "9px",
+                      height: "9px",
+                      background: "#00f2b0",
+                      borderRadius: "50%",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)"
+                    }}
+                  ></span>
+                )}
+              </span>
+              {opcao}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="botoesirevir">
+        <button className="btnirevir" onClick={prevStep}>Voltar</button>
+        <button className="btnirevir"
+          onClick={confirmarPreferencias}
+          disabled={selecionadas.length === 0}
+          style={{ marginLeft: 10 }}
+        >
+          Confirmar
+        </button>
+      </div>
+      <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
+    </div>
+  );
+}
       case 7:
         return (
           <div>
@@ -335,6 +748,7 @@ export default function QuizPage({ onFinish }) {
                 Finalizar
               </button>
             </div>
+            <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
           </div>
         );
 
