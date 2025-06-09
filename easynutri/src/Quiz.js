@@ -32,6 +32,10 @@ export default function QuizPage({ onFinish }) {
     setUserData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const [alergiasSelecionadas, setAlergiasSelecionadas] = useState(
+  userData.alergiasComuns ? userData.alergiasComuns.split(",") : []
+);
+
   const renderStepContent = () => {
     switch (step) {
       case 0:
@@ -729,28 +733,128 @@ case 6: {
     </div>
   );
 }
-      case 7:
-        return (
-          <div>
-            <h2>Tem alguma alergia?</h2>
-            <input
-              type="text"
-              placeholder="Digite suas alergias (ou deixe vazio)"
-              value={userData.alergias}
-              onChange={(e) => handleChange("alergias", e.target.value)}
-            />
-            <div style={{ marginTop: 20 }}>
-              <button onClick={prevStep}>Voltar</button>
-              <button
-                onClick={() => onFinish(userData)}
-                style={{ marginLeft: 10 }}
+case 7: {
+  const alergiasComuns = [
+    "Leite", "Ovo", "Amendoim",
+    "Soja", "Glúten", "Frutos do mar"
+  ];
+
+  const toggleAlergia = (opcao) => {
+    setAlergiasSelecionadas((prev) =>
+      prev.includes(opcao)
+        ? prev.filter((item) => item !== opcao)
+        : [...prev, opcao]
+    );
+  };
+
+  const finalizarAlergias = () => {
+    handleChange("alergiasComuns", alergiasSelecionadas.join(","));
+    onFinish({
+      ...userData,
+      alergiasComuns: alergiasSelecionadas.join(","),
+      alergias: userData.alergias || ""
+    });
+  };
+
+  return (
+    <div className="divcase7">
+      <div className="divquestion2">
+        <div className="divlogocentral">
+          <img className="logo" src="/imagens/logogrande.svg" alt="Logo" />
+        </div>
+        <div className="barrinha">
+          <div className="b1c1"></div>
+          <div className="b2tp"></div>
+          <div className="b3tp"></div>
+          <div className="b4tp"></div>
+        </div>
+        <h2 className="Titulo">Você possui alguma alergia alimentar?</h2>
+        <h3 className="titulodivisoria">Alergias comuns</h3>
+        <div className="grid2">
+          {alergiasComuns.map((opcao) => (
+            <button
+              key={opcao}
+              type="button"
+              className={
+                alergiasSelecionadas.includes(opcao)
+                  ? "preferencia-opcao selecionada"
+                  : "preferencia-opcao"
+              }
+              onClick={() => toggleAlergia(opcao)}
+              style={{
+                width: "100%",
+                maxWidth: "180px",
+                minWidth: "120px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "10px",
+                borderRadius: "5px",
+                border: alergiasSelecionadas.includes(opcao)
+                  ? "2px solid #00f2b0"
+                  : "1px solid #ccc",
+                background: "#fff",
+                cursor: "pointer"
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "15px",
+                  height: "15px",
+                  borderRadius: "50%",
+                  border: "2px solid #000",
+                  position: "relative",
+                  background: "#fff",
+                  marginRight: "5px",
+                  flexShrink: 0
+                }}
               >
-                Finalizar
-              </button>
-            </div>
-            <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
-          </div>
-        );
+                {alergiasSelecionadas.includes(opcao) && (
+                  <span
+                    style={{
+                      display: "block",
+                      width: "9px",
+                      height: "9px",
+                      background: "#00f2b0",
+                      borderRadius: "50%",
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)"
+                    }}
+                  ></span>
+                )}
+              </span>
+              {opcao}
+            </button>
+          ))}
+        </div>
+
+        <h3 className="titulodivisoria" style={{ marginTop: 24 }}>Outras alergias</h3>
+        <input
+          className="placeholder2"
+          type="text"
+          placeholder="Digite suas alergias (ou deixe vazio)"
+          value={userData.alergias}
+          onChange={(e) => handleChange("alergias", e.target.value)}
+        />
+
+        <div className="botoesirevir">
+          <button className="btnirevir" onClick={prevStep}>Voltar</button>
+          <button
+            className="btnirevir"
+            onClick={finalizarAlergias}
+            style={{ marginLeft: 10 }}
+          >
+            Finalizar
+          </button>
+        </div>
+        <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
+      </div>
+    </div>
+  );
+}
 
       default:
         return <div>Erro: etapa desconhecida.</div>;
