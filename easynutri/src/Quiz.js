@@ -350,7 +350,7 @@ case 6: {
   };
 
   const confirmarPreferencias = () => {
-    const preferencias = selecionadas.join(",");
+    const preferencias = selecionadas.length > 0 ? selecionadas.join(",") : "null";
     handleChange("preferencia", preferencias);
     console.log("Dados atuais do usuário:", { ...userData, preferencia: preferencias });
     nextStep();
@@ -723,7 +723,6 @@ case 6: {
         <button className="btnirevir" onClick={prevStep}>Voltar</button>
         <button className="btnirevir"
           onClick={confirmarPreferencias}
-          disabled={selecionadas.length === 0}
           style={{ marginLeft: 10 }}
         >
           Confirmar
@@ -734,7 +733,7 @@ case 6: {
   );
 }
 case 7: {
-  const alergiasComuns = [
+  const alergias = [
     "Leite", "Ovo", "Amendoim",
     "Soja", "Glúten", "Frutos do mar"
   ];
@@ -748,12 +747,24 @@ case 7: {
   };
 
   const finalizarAlergias = () => {
-    handleChange("alergiasComuns", alergiasSelecionadas.join(","));
-    onFinish({
-      ...userData,
-      alergiasComuns: alergiasSelecionadas.join(","),
-      alergias: userData.alergias || ""
-    });
+    // Se nenhum campo for preenchido, salva "null"
+    const alergiasSelecionadasStr = alergiasSelecionadas.length > 0 ? alergiasSelecionadas.join(",") : "";
+    const alergiasTexto = userData.alergias && userData.alergias.trim() !== "" ? userData.alergias : "";
+    let valorFinal = "";
+
+    if (alergiasSelecionadasStr && alergiasTexto) {
+      valorFinal = `${alergiasSelecionadasStr},${alergiasTexto}`;
+    } else if (alergiasSelecionadasStr) {
+      valorFinal = alergiasSelecionadasStr;
+    } else if (alergiasTexto) {
+      valorFinal = alergiasTexto;
+    } else {
+      valorFinal = "null";
+    }
+
+    handleChange("alergias", valorFinal)
+    console.log("Dados atuais do usuário:", { ...userData, alergias: valorFinal });
+    nextStep(); // Vai para o case 8
   };
 
   return (
@@ -771,7 +782,7 @@ case 7: {
         <h2 className="Titulo">Você possui alguma alergia alimentar?</h2>
         <h3 className="titulodivisoria">Alergias comuns</h3>
         <div className="grid2">
-          {alergiasComuns.map((opcao) => (
+          {alergias.map((opcao) => (
             <button
               key={opcao}
               type="button"
@@ -837,7 +848,8 @@ case 7: {
           type="text"
           placeholder="Digite suas alergias (ou deixe vazio)"
           value={userData.alergias}
-          onChange={(e) => handleChange("alergias", e.target.value)}
+          onChange={(e) => 
+            handleChange("alergias", e.target.value)}
         />
 
         <div className="botoesirevir">
@@ -855,6 +867,56 @@ case 7: {
     </div>
   );
 }
+
+case 8:
+  return (
+    <div className="divfinalvenda">
+      <div className="divlogocentral">
+        <img className="logocentral" src="/imagens/logogrande.svg" alt="Logo" />
+      </div>
+      <h2 className="Titulo">Seu plano está pronto!</h2>
+      <p className="Subtitulo1">
+        Parabéns! Com base nas suas respostas, criamos um plano de nutrição personalizado para você.
+      </p>
+      <div className="botoesirevir">
+        <button className="btnirevir" onClick={prevStep}>Voltar</button>
+        <button
+          className="btnirevir"
+          onClick={nextStep}
+          style={{ marginLeft: 10 }}
+        >
+          Ir para o checkout
+        </button>
+      </div>
+      <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
+    </div>
+  );
+
+case 9:
+  return (
+    <div className="divcheckout">
+      <div className="divlogocentral">
+        <img className="logocentral" src="/imagens/logogrande.svg" alt="Logo" />
+      </div>
+      <h2 className="Titulo">Checkout</h2>
+      <p className="Subtitulo1">
+        Complete seu pagamento para acessar seu plano personalizado!
+      </p>
+      {/* Aqui você pode inserir seu formulário de pagamento ou integração com gateway */}
+      <div className="botoesirevir">
+        <button className="btnirevir" onClick={prevStep}>Voltar</button>
+        {/* Botão de finalizar compra ou integração */}
+        <button
+          className="btnirevir"
+          onClick={() => alert('Compra finalizada!')}
+          style={{ marginLeft: 10 }}
+        >
+          Finalizar compra
+        </button>
+      </div>
+      <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
+    </div>
+  );
 
       default:
         return <div>Erro: etapa desconhecida.</div>;
