@@ -350,7 +350,7 @@ case 6: {
   };
 
   const confirmarPreferencias = () => {
-    const preferencias = selecionadas.length > 0 ? selecionadas.join(",") : "null";
+    const preferencias = selecionadas.length > 0 ? selecionadas.join(",") : "sem restrições";
     handleChange("preferencia", preferencias);
     console.log("Dados atuais do usuário:", { ...userData, preferencia: preferencias });
     nextStep();
@@ -759,7 +759,7 @@ case 7: {
     } else if (alergiasTexto) {
       valorFinal = alergiasTexto;
     } else {
-      valorFinal = "null";
+      valorFinal = "sem restrições";
     }
 
     handleChange("alergias", valorFinal)
