@@ -2,6 +2,8 @@ import React, { useState, useEffect, use } from "react";
 import './Quiz.css';
 import { FaChevronRight } from "react-icons/fa";
 import { ImGift } from "react-icons/im";
+import PaginaDeVendas from "./PaginaDeVendas";
+import chackout from "./chackout";
 export default function QuizPage({ onFinish }) {
   const [userData, setUserData] = useState({
     dieta: "",
@@ -24,6 +26,10 @@ export default function QuizPage({ onFinish }) {
   useEffect(() => {
     localStorage.setItem("quizStep", step);
   }, [step]);
+
+  useEffect(() => {
+    localStorage.setItem("userData", JSON.stringify(userData));
+  }, [userData]);
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
@@ -221,7 +227,7 @@ export default function QuizPage({ onFinish }) {
               <div className="b3"></div>
               <div className="b4"></div>
             </div>
-            <h2 className="Titulo">Qual a sua altura? (Metros)</h2>
+            <h2 className="Titulo">Qual a sua altura? (Cm)</h2>
             <input className="placeholder"
               type="number"
               placeholder="Digite sua altura"
@@ -870,52 +876,18 @@ case 7: {
 
 case 8:
   return (
-    <div className="divfinalvenda">
-      <div className="divlogocentral">
-        <img className="logocentral" src="/imagens/logogrande.svg" alt="Logo" />
-      </div>
-      <h2 className="Titulo">Seu plano está pronto!</h2>
-      <p className="Subtitulo1">
-        Parabéns! Com base nas suas respostas, criamos um plano de nutrição personalizado para você.
-      </p>
-      <div className="botoesirevir">
-        <button className="btnirevir" onClick={prevStep}>Voltar</button>
-        <button
-          className="btnirevir"
-          onClick={nextStep}
-          style={{ marginLeft: 10 }}
-        >
-          Ir para o checkout
-        </button>
-      </div>
-      <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
-    </div>
+    <PaginaDeVendas 
+      prevStep={prevStep}
+      nextStep={nextStep}
+      />
   );
 
 case 9:
   return (
-    <div className="divcheckout">
-      <div className="divlogocentral">
-        <img className="logocentral" src="/imagens/logogrande.svg" alt="Logo" />
-      </div>
-      <h2 className="Titulo">Checkout</h2>
-      <p className="Subtitulo1">
-        Complete seu pagamento para acessar seu plano personalizado!
-      </p>
-      {/* Aqui você pode inserir seu formulário de pagamento ou integração com gateway */}
-      <div className="botoesirevir">
-        <button className="btnirevir" onClick={prevStep}>Voltar</button>
-        {/* Botão de finalizar compra ou integração */}
-        <button
-          className="btnirevir"
-          onClick={() => alert('Compra finalizada!')}
-          style={{ marginLeft: 10 }}
-        >
-          Finalizar compra
-        </button>
-      </div>
-      <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
-    </div>
+    <checkout 
+      prevStep={prevStep}
+      nextStep={nextStep}
+      />
   );
 
       default:
