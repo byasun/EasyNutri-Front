@@ -1,7 +1,6 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import './Quiz.css';
 import { FaChevronRight } from "react-icons/fa";
-import { ImGift } from "react-icons/im";
 import PaginaDeVendas from "./PaginaDeVendas";
 import Checkout from "./checkout";
 export default function QuizPage({ onFinish }) {
@@ -65,14 +64,14 @@ export default function QuizPage({ onFinish }) {
             </div>
             <div id="divbotao">
               <button className="botaosexomen" onClick={() => { handleChange("sexo", "homem"); nextStep(); }}>
-                <img className="pessoabotao" src="/imagens/botaohomem.svg" />
+                <img className="pessoabotao" src="/imagens/botaohomem.svg" alt="Ícone Homem" />
                  <div className="linha-botao">
                   <span className="textobotao">Masculino</span>
                   <FaChevronRight className="iconseta" />
                 </div>
               </button>
               <button className="botaosexwoman" onClick={() => { handleChange("sexo", "mulher"); nextStep(); }}>
-                <img className="pessoabotao" src="/imagens/botaomuie.svg" />
+                <img className="pessoabotao" src="/imagens/botaomuie.svg" alt="Ícone Mulher" />
                  <div className="linha-botao">
                   <span className="textobotao">Feminino</span>
                   <FaChevronRight className="iconseta" />
@@ -82,7 +81,7 @@ export default function QuizPage({ onFinish }) {
             <div className="textoexp">
               <div>
                 <div className="linhaexp">
-                  <img className="gift" src="/imagens/Animation - 1749040562880.gif"  />
+                  <img className="gift" src="/imagens/Animation - 1749040562880.gif" alt="Animação de presente" />
                   <h3 className="explicacao">A EasyNutri™ Acaba de Resolver o Seu Problema</h3>
                 </div>
                 <p className="explicacao2">Com o nosso plano de nutrição personalizado, você terá acesso a um cardápio adaptado, planejado por nutricionistas, para atender às suas necessidades e objetivos, tudo isso em menos de 5 minutos!</p>
@@ -167,7 +166,7 @@ export default function QuizPage({ onFinish }) {
     }
     >
       <div className="tituloedesc">
-        <img className="imagemdieta" src={img}></img>
+        <img className="imagemdieta" src={img} alt={`Imagem da dieta ${nome}`}></img>
         <div className="desctitu">
           <div className="titulo-dieta">{nome}</div>
           <div className="descricao-dieta">{descricao}</div>
@@ -324,7 +323,7 @@ export default function QuizPage({ onFinish }) {
     }
     >
       <div className="tituloedesc">
-        <img className="imagemdieta" src={img}></img>
+        <img className="imagemdieta" src={img} alt={`Imagem do objetivo ${nome}`}></img>
         <div className="desctitu">
           <div className="titulo-dieta">{nome}</div>
           <div className="descricao-dieta">{descricao}</div>

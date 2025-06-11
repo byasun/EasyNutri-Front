@@ -31,24 +31,6 @@ function App() {
     setAnswers([]);
   };
 
-  const [userData, setUserData] = useState({
-  dieta: "",
-  peso: "",
-  altura: "",
-  idade: "",
-  sexo: "",
-  objetivo: "",
-  preferencia: "",
-  alergias: "",
-});
-
-const [step, setStep] = useState(0);
-
-const nextStep = () => setStep(prev => prev + 1);
-const prevStep = () => setStep(prev => prev - 1);
-
-
-
   if (!quizStarted) {
     // Aqui só aparece exatamente a HomePage, nada mais
     return <HomePage onStart={handleStart} />;
