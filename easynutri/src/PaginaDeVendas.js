@@ -31,6 +31,8 @@ function gifPorObjetivo(objetivo) {
       return "/imagens/Animation - 1749211936355.gif";
     case "hipertrofia":
       return "/imagens/Animation - 1749212342747.gif";
+    default:
+      return ""; // Adicionado para evitar warning
   }
 }
 
@@ -40,6 +42,8 @@ function txtPorObjetivo(objetivo) {
       return "Emagrecimento";
     case "hipertrofia":
       return "Hipertrofia";
+    default:
+      return ""; // Adicionado para evitar warning
   }
 }
 export default function PaginaFinalVenda({ prevStep, nextStep, userData }) {
@@ -56,6 +60,7 @@ export default function PaginaFinalVenda({ prevStep, nextStep, userData }) {
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <img
           src={gifPorObjetivo(dados.objetivo)}
+          alt="Gif representando o objetivo"
           style={{ width: 180, height: 180, marginBottom: 16 }}
         />
         <div>
