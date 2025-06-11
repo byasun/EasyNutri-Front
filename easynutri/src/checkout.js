@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function Checkout({ prevStep, nextStep }) {
+export default function Checkout({ prevStep }) {
+  useEffect(() => {
+    if (!window.MercadoPago) {
+      console.error("MercadoPago SDK não carregado!");
+      return;
+    }
+    const mp = new window.MercadoPago("SUA_PUBLIC_KEY_AQUI", {
+      locale: "pt-BR"
+    });
+
+    mp.bricks().create("cardPayment", "paymentBrick_container", {
+      initialization: {
+        amount: 100,
+      },
+      callbacks: {
+        onReady: () => {},
+        onSubmit: (cardFormData) => {},
+        onError: (error) => {
+          alert("Erro no pagamento: " + error.message);
+        }
+      }
+    });
+  }, []);
+
   return (
-    <div className="divcase7">
+    <div className="divcase9">
       <div className="divquestion2">
         <div className="divlogocentral">
           <img className="logo" src="/imagens/logogrande.svg" alt="Logo" />
@@ -17,16 +40,9 @@ export default function Checkout({ prevStep, nextStep }) {
         <p className="Subtitulo1">
           Complete seu pagamento para acessar seu plano personalizado!
         </p>
-        {/* Aqui você pode adicionar campos de pagamento futuramente */}
+        <div id="paymentBrick_container" style={{ margin: "30px 0" }}></div>
         <div className="botoesirevir">
           <button className="btnirevir" onClick={prevStep}>Voltar</button>
-          <button
-            className="btnirevir"
-            onClick={nextStep}
-            style={{ marginLeft: 10 }}
-          >
-            Finalizar compra
-          </button>
         </div>
         <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
       </div>

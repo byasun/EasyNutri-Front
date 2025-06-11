@@ -3,7 +3,7 @@ import './Quiz.css';
 import { FaChevronRight } from "react-icons/fa";
 import { ImGift } from "react-icons/im";
 import PaginaDeVendas from "./PaginaDeVendas";
-import chackout from "./chackout";
+import Checkout from "./checkout";
 export default function QuizPage({ onFinish }) {
   const [userData, setUserData] = useState({
     dieta: "",
@@ -884,7 +884,7 @@ case 8:
 
 case 9:
   return (
-    <checkout 
+    <Checkout 
       prevStep={prevStep}
       nextStep={nextStep}
       />
