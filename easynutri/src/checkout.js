@@ -6,7 +6,7 @@ export default function Checkout({ prevStep }) {
       console.error("MercadoPago SDK não carregado!");
       return;
     }
-    const mp = new window.MercadoPago("SUA_PUBLIC_KEY_AQUI", {
+    const mp = new window.MercadoPago("APP_USR-9414724d-7315-44e3-be53-0ede3c7d3258", {
       locale: "pt-BR"
     });
 
