@@ -531,6 +531,7 @@
 }
 
 .produto {
+  border-radius: 8px;
   border: solid 2px #00f2b0;
   width: 95%;
   margin: 0 auto;
@@ -551,4 +552,16 @@
 .textinho{
   margin-top: 0px;
   margin-bottom: 0px;
+}
+.mes{
+  font-weight: bold;
+  color: black;
+  background-color: #00f2b0;
+  border-radius: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 15px;
+  padding-right: 13px;
+  width: 150px;
+  margin-top: 10px;
 }

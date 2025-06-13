@@ -108,6 +108,7 @@ export default function PaginaFinalVenda({ prevStep, nextStep, userData }) {
         <div className="infoproduto">
           <h3 className="textinho">Plano Personalizado NutriFácil</h3>
           <p className="textinho"><strong>Preço:</strong> R$ 49.90</p>
+          <p className="mes">Para mais de 1 mês</p>
         </div>
       </div>
       <div className="botoesirevir">
