@@ -529,3 +529,40 @@
   margin: 0;
   text-align: left;
 }
+
+.produto {
+  border-radius: 8px;
+  border: solid 2px #00f2b0;
+  width: 95%;
+  margin: 0 auto;
+  text-align: left;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 30px;
+  display: flex;             
+  flex-direction: row;        
+  align-items: center;        
+  gap: 16px;                  
+}
+.infoproduto{
+  border-left: solid 3px #00f2b0;
+  width: 70%;
+  padding-left: 5px;
+}
+.textinho{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.mes{
+  font-weight: bold;
+  color: black;
+  background-color: #00f2b0;
+  border-radius: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 15px;
+  padding-right: 13px;
+  width: 150px;
+  margin-top: 10px;
+  padding-bottom: 1px;
+}

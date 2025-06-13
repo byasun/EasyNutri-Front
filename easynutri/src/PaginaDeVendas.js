@@ -46,6 +46,24 @@ function txtPorObjetivo(objetivo) {
       return ""; // Adicionado para evitar warning
   }
 }
+
+function gifPorDieta(dieta) {
+  switch ((dieta || "").toLowerCase()) {
+    case "low carb":
+      return "/imagens/Animation - 1749142869912.gif";
+    case "vegetariana":
+      return "/imagens/Animation - 1749132322980.gif";
+    case "mediterrânea":
+      return "/imagens/Animation - 1749142051509.gif";
+    case "cetogênica":
+      return "/imagens/Animation - 1749143230081.gif";
+    // Adicione outros tipos de dieta conforme necessário
+    default:
+      return "/imagens/Animation - 1749142051509.gif";
+  }
+}
+
+
 export default function PaginaFinalVenda({ prevStep, nextStep, userData }) {
   const dados =
     userData ||
@@ -64,25 +82,36 @@ export default function PaginaFinalVenda({ prevStep, nextStep, userData }) {
           style={{ width: 180, height: 180, marginBottom: 16 }}
         />
         <div>
-            <h1>
-                Para {txtPorObjetivo(dados.objetivo)}
-            </h1>
+          <h1>
+            Para {txtPorObjetivo(dados.objetivo)}
+          </h1>
         </div>
         <div className="grid2">
-            <div className="imc">
-                <p className="imcc"><strong>IMC</strong></p>
-                <p className="vimc">{calcularIMC(dados.peso, dados.altura)}</p>
-            </div>
-            <div className="dadosusuario">
-                <p className="d1"><strong>Peso:</strong> {dados.peso || "Não informado"} kg</p>
-                <p className="d1"><strong>Altura:</strong> {dados.altura || "Não informado"} m</p>
-                <p className="d1"><strong>Idade:</strong> {dados.idade || "Não informado"} anos</p>
-                <p className="d1"><strong>Dieta:</strong> {dados.dieta || "Não informado"}</p>
-            </div>
+          <div className="imc">
+            <p className="imcc"><strong>IMC</strong></p>
+            <p className="vimc">{calcularIMC(dados.peso, dados.altura)}</p>
+          </div>
+          <div className="dadosusuario">
+            <p className="d1"><strong>Peso:</strong> {dados.peso || "Não informado"} kg</p>
+            <p className="d1"><strong>Altura:</strong> {dados.altura || "Não informado"} m</p>
+            <p className="d1"><strong>Idade:</strong> {dados.idade || "Não informado"} anos</p>
+            <p className="d1"><strong>Dieta:</strong> {dados.dieta || "Não informado"}</p>
+          </div>
+        </div>
+      </div>
+      <div className="produto">
+        <img
+          src={gifPorDieta(dados.dieta)}
+          alt={`Gif da dieta ${dados.dieta || ""}`}
+          style={{ width: 120, height: 120, marginBottom: 8 }}
+        />
+        <div className="infoproduto">
+          <h3 className="textinho">Plano Personalizado NutriFácil</h3>
+          <p className="textinho"><strong>Preço:</strong> R$ 49.90</p>
+          <p className="mes">Para mais de 1 mês</p>
         </div>
       </div>
       <div className="botoesirevir">
-        <button className="btnirevir" onClick={prevStep}>Voltar</button>
         <button
           className="btnirevir"
           onClick={nextStep}
