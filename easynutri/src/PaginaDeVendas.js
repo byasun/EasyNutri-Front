@@ -64,7 +64,7 @@ function gifPorDieta(dieta) {
 }
 
 
-export default function PaginaFinalVenda({ prevStep, nextStep, userData }) {
+export default function PaginaDeVendas({ prevStep, nextStep, userData }) {
   const dados =
     userData ||
     JSON.parse(localStorage.getItem("userData") || "{}");
