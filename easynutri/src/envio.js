@@ -1,7 +1,5 @@
-// Função para enviar os dados do usuário para a API de pagamento
 
-// Substitua pela URL real da sua API de backend
-const API_URL = "nutrifacil-back.azurewebsites.net";
+const API_URL = process.env.API_URL;
 
 export async function enviarUserDataParaPagamento(userData) {
   try {

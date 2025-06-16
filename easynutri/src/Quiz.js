@@ -4,7 +4,6 @@ import { FaChevronRight } from "react-icons/fa";
 import PaginaDeVendas from "./PaginaDeVendas";
 import Wpp from './wpp';
 import Checkout from "./checkout";
-import { GiWarpPipe } from "react-icons/gi";
 export default function QuizPage({ onFinish }) {
   const [userData, setUserData] = useState({
     dieta: "",
