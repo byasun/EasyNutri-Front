@@ -1,5 +1,4 @@
-
-const API_URL = process.env.API_URL;
+const API_URL = process.env.REACT_APP_API_URL; // Corrija aqui
 
 export async function enviarUserDataParaPagamento(userData) {
   try {
@@ -15,10 +14,9 @@ export async function enviarUserDataParaPagamento(userData) {
       throw new Error("Erro ao enviar dados para o pagamento");
     }
 
-    // Supondo que a resposta da API traga informações do pagamento
     const resultado = await response.json();
     return resultado;
   } catch (error) {
     console.error("Erro no envio para pagamento:", error);
-      }
+  }
 }
