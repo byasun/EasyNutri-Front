@@ -9,7 +9,7 @@ export default function Checkout() {
 
     // Função para buscar o preferenceId do backend
     const fetchPreferenceId = async () => {
-      const response = await fetch('http://localhost:3001/api/create_preference', {
+      const response = await fetch('${process.env.REACT_APP_API_URL}/api/create_preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ celular: '11999999999' }) // Substitua pelo número real do usuário se desejar
