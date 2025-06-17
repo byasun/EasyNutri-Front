@@ -1,36 +1,48 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react"; // ✅ Adiciona useState aqui
 import './Quiz.css';
 
 export default function Checkout() {
   const brickController = useRef(null);
 
+  // ✅ useState movido para dentro do componente
+  const [userData, setUserData] = useState({
+    dieta: "",
+    peso: "",
+    altura: "",
+    idade: "",
+    sexo: "",
+    objetivo: "",
+    preferencia: "",
+    alergias: "",
+    whatsapp: "", // Adicione se for necessário para o pagamento
+  });
+
   useEffect(() => {
     let destroyed = false;
 
-    // Função para buscar o preferenceId do backend
     const fetchPreferenceId = async () => {
       const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/payments/create_preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ celular: '11999999999' }) // Substitua pelo número real do usuário se desejar
+        body: JSON.stringify({ celular: userData.celular }) // Aqui usa só o celular para criar a preferência
       });
       const data = await response.json();
       return data.preferenceId;
     };
 
-    // Função para inicializar o Brick
     const initializeBrick = (preferenceId) => {
       if (!window.MercadoPago) return;
       const mp = new window.MercadoPago('APP_USR-486df697-f288-44e6-b23a-6ff1de540186', { locale: 'pt-BR' });
       mp.bricks().create("payment", "paymentBrick_container", {
         initialization: { preferenceId },
         callbacks: {
-          onReady: () => {},
+          onReady: () => { },
           onError: (error) => { console.error(error); },
-          onSubmit: () => {},
+          onSubmit: () => { },
           onSuccess: (payment) => {
-            // Aqui você pode chamar sua função para enviar os dados do usuário + pagamento
             alert('Pagamento concluído com sucesso!');
+            // Se quiser enviar os dados automaticamente após o pagamento:
+            // handleSendData();
           },
         }
       }).then(controller => {
@@ -38,7 +50,6 @@ export default function Checkout() {
       });
     };
 
-    // Carregar o script do Mercado Pago e inicializar o Brick
     const loadAndInit = async () => {
       if (!window.MercadoPago) {
         const script = document.createElement('script');
@@ -58,7 +69,6 @@ export default function Checkout() {
 
     loadAndInit();
 
-    // Cleanup: destruir o Brick ao desmontar ou atualizar
     return () => {
       destroyed = true;
       if (brickController.current && brickController.current.destroy) {
@@ -67,7 +77,26 @@ export default function Checkout() {
       const container = document.getElementById("paymentBrick_container");
       if (container) container.innerHTML = "";
     };
-  }, []);
+  }, [userData.celular]); // ✅ Dependência adicionada para garantir que use celular atualizado
+
+  // ✅ Função que envia o userData inteiro como JSON
+  const handleSendData = async () => {
+    try {
+      const response = await fetch('https://sua-api.com/receber-dados', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData) // Envia o objeto completo
+      });
+
+      if (!response.ok) throw new Error('Erro ao enviar dados');
+      alert('Dados enviados com sucesso!');
+    } catch (error) {
+      console.error(error);
+      alert('Erro ao enviar os dados');
+    }
+  };
 
   return (
     <div className="divquestion2">
@@ -76,6 +105,15 @@ export default function Checkout() {
       </div>
       <h2 className="Titulo">Checkout</h2>
       <div id="paymentBrick_container"></div>
+      <div>
+        <button
+          className="btnirevir"
+          style={{ marginLeft: 10 }}
+          onClick={handleSendData}
+        >
+          Enviar
+        </button>
+      </div>
       <p className="rodape">Todos os direitos Reservados | EasyNutri™</p>
     </div>
   );
