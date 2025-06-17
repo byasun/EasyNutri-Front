@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import HomePage from "./Quiz";
 import "./App.css";
+import { enviarUserDataParaPagamento } from "./envio"; // Importação
 
 function App() {
   const [quizStarted, setQuizStarted] = useState(false);
@@ -16,35 +17,29 @@ function App() {
     setCurrentStep(prev => prev + 1);
   };
 
-  const handleFinish = () => {
-    const json = JSON.stringify(answers, null, 2);
-    const blob = new Blob([json], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "respostas.json";
-    link.click();
-
+  const handleFinish = async () => {
+    try {
+      await enviarUserDataParaPagamento(answers); // Envia para o backend
+      alert("Dados enviados com sucesso!");
+    } catch (error) {
+      alert("Erro ao enviar dados para o backend.");
+    }
     setQuizStarted(false);
     setCurrentStep(0);
     setAnswers([]);
   };
 
   if (!quizStarted) {
-    // Aqui só aparece exatamente a HomePage, nada mais
     return <HomePage onStart={handleStart} />;
   }
 
   if (currentStep >= 11) {
     handleFinish();
-    return null; // ou pode retornar uma tela em branco, sem texto
+    return null;
   }
 
   return (
     <div className="App">
-      {/* Renderização das páginas específicas do quiz conforme currentStep */}
-      {/* Por enquanto, um botão para simular uma resposta */}
       <button onClick={() => handleAnswer({ step: currentStep, resposta: "Resposta Exemplo" })}>
         Responder e Avançar
       </button>
