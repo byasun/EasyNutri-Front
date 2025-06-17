@@ -1,4 +1,5 @@
-const API_URL = `${process.env.REACT_APP_API_URL}/api/create_preference`;
+const API_URL = process.env.REACT_APP_API_URL; 
+
 export async function enviarUserDataParaPagamento(userData) {
   try {
     const response = await fetch(API_URL, {
