@@ -1,8 +1,8 @@
-const API_URL = process.env.REACT_APP_API_URL; 
+//const API_URL = process.env.REACT_APP_API_URL; 
 
 export async function enviarUserDataParaPagamento(userData) {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch('https://nutrifacil-back.azurewebsites.net', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
