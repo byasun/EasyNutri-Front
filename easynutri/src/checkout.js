@@ -9,7 +9,7 @@ export default function Checkout() {
 
     // Função para buscar o preferenceId do backend
     const fetchPreferenceId = async () => {
-      const response = await fetch('API_URL', {
+      const response = await fetch('https://nutrifacil-back.azurewebsites.net', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ celular: '11999999999' }) // Substitua pelo número real do usuário se desejar
