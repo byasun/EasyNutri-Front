@@ -1,5 +1,3 @@
-//const API_URL = process.env.REACT_APP_API_URL; 
-
 export async function enviarUserDataParaPagamento(userData) {
   try {
     const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/payments/create_preference', {

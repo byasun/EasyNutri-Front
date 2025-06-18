@@ -89,7 +89,7 @@ export default function Checkout() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userData) // Envia o objeto completo
+        body: JSON.stringify({ userData }) // Envia o objeto completo
       });
 
       if (!response.ok) throw new Error('Erro ao enviar dados');
