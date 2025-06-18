@@ -28,7 +28,7 @@ export default function Wpp({ nextStep, prevStep, userData, handleChange }) {
 
     const handleInputChange = (e) => {
         let numbers = e.target.value.replace(/\D/g, "").slice(0, 11);
-        handleChange("whatsapp", formatWhatsapp(numbers));
+        handleChange("celular", formatWhatsapp(numbers));
     };
 
     const handleKeyDown = (e) => {
@@ -79,7 +79,7 @@ export default function Wpp({ nextStep, prevStep, userData, handleChange }) {
                 pattern="[0-9]*"
                 maxLength={16}
                 placeholder="(11) 99999-9999"
-                value={userData.whatsapp || ""}
+                value={userData.celular || ""}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 autoComplete="off"
@@ -93,7 +93,7 @@ export default function Wpp({ nextStep, prevStep, userData, handleChange }) {
                 <button
                     className="btnirevir"
                     onClick={handleContinuar}
-                    disabled={!isValidWhatsapp(userData.whatsapp || "") || loading}
+                    disabled={!isValidWhatsapp(userData.celular || "") || loading}
                     style={{ marginLeft: 10 }}
                 >
                     {loading ? "Enviando..." : "Continuar"}
