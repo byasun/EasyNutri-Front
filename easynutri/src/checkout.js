@@ -14,8 +14,8 @@ export default function Checkout() {
     sexo: "",
     objetivo: "",
     preferencia: "",
-    alergias: userData.alergias.split(","),
-    whatsapp: userData.preferencia.split(","), // Adicione se for necessário para o pagamento
+    alergias: "",
+    whatsapp: "", // Adicione se for necessário para o pagamento
   });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Checkout() {
       const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/payments/create_preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ celular: userData.whatsapp.replace(/\D/g, '')  }) // Aqui usa só o celular para criar a preferência
+        body: JSON.stringify({ celular: userData.whatsapp.replace(/\D/g, '') }) // Remove caracteres não numéricos
       });
       const data = await response.json();
       console.log("Dados da preferência:", data);
@@ -83,13 +83,21 @@ export default function Checkout() {
 
   // ✅ Função que envia o userData inteiro como JSON
   const handleSendData = async () => {
+    // Formata o userData antes de enviar
+    const formattedUserData = {
+      ...userData,
+      whatsapp: "+55" + userData.whatsapp.replace(/\D/g, ''), // Formato internacional
+      alergias: userData.alergias.split(","), // Converte string em array
+      preferencia: userData.preferencia.split(",") // Converte string em array
+    };
+
     try {
       const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/diet-plans/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ userData }) // Envia o objeto completo
+        body: JSON.stringify({ userData: formattedUserData }) // Envia o objeto userData dentro de um objeto
       });
 
       if (!response.ok) throw new Error('Erro ao enviar dados');
