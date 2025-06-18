@@ -14,8 +14,8 @@ export default function Checkout() {
     sexo: "",
     objetivo: "",
     preferencia: "",
-    alergias: "",
-    whatsapp: "", // Adicione se for necessário para o pagamento
+    alergias: userData.alergias.split(","),
+    whatsapp: userData.preferencia.split(","), // Adicione se for necessário para o pagamento
   });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Checkout() {
       const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/payments/create_preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ celular: userData.whatsapp }) // Aqui usa só o celular para criar a preferência
+        body: JSON.stringify({ celular: userData.whatsapp.replace(/\D/g, '')  }) // Aqui usa só o celular para criar a preferência
       });
       const data = await response.json();
       console.log("Dados da preferência:", data);
