@@ -82,7 +82,7 @@ export default function Checkout() {
   // ✅ Função que envia o userData inteiro como JSON
   const handleSendData = async () => {
     try {
-      const response = await fetch('https://sua-api.com/receber-dados', {
+      const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/diet-plans', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
