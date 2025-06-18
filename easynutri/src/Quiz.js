@@ -14,6 +14,7 @@ export default function QuizPage({ onFinish }) {
     objetivo: "",
     preferencia: "",
     alergias: "",
+    whatsapp: "",
   });
 
   const [step, setStep] = useState(() => {
