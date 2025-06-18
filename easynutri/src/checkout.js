@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react"; // ✅ Adiciona useState aqui
 import './Quiz.css';
 
@@ -24,9 +25,10 @@ export default function Checkout() {
       const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/payments/create_preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ celular: userData.celular }) // Aqui usa só o celular para criar a preferência
+        body: JSON.stringify({ celular: userData.whatsapp }) // Aqui usa só o celular para criar a preferência
       });
       const data = await response.json();
+      console.log("Dados da preferência:", data);
       return data.preferenceId;
     };
 
@@ -77,12 +79,12 @@ export default function Checkout() {
       const container = document.getElementById("paymentBrick_container");
       if (container) container.innerHTML = "";
     };
-  }, [userData.celular]); // ✅ Dependência adicionada para garantir que use celular atualizado
+  }, [userData.whatsapp]); // ✅ Dependência adicionada para garantir que use celular atualizado
 
   // ✅ Função que envia o userData inteiro como JSON
   const handleSendData = async () => {
     try {
-      const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/diet-plans', {
+      const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/diet-plans/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
