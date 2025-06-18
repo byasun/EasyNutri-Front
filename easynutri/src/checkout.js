@@ -15,7 +15,7 @@ export default function Checkout() {
     objetivo: "",
     preferencia: "",
     alergias: "",
-    whatsapp: "", // Adicione se for necessário para o pagamento
+    celular: "", // Adicione se for necessário para o pagamento
   });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Checkout() {
       const response = await fetch('https://nutrifacil-back.azurewebsites.net/api/payments/create_preference', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ celular: userData.whatsapp.replace(/\D/g, '') }) // Remove caracteres não numéricos
+        body: JSON.stringify({ celular: userData.celular })
       });
       const data = await response.json();
       console.log("Dados da preferência:", data);
@@ -79,14 +79,14 @@ export default function Checkout() {
       const container = document.getElementById("paymentBrick_container");
       if (container) container.innerHTML = "";
     };
-  }, [userData.whatsapp]); // ✅ Dependência adicionada para garantir que use celular atualizado
+  }, [userData.celular]); // ✅ Dependência adicionada para garantir que use celular atualizado
 
   // ✅ Função que envia o userData inteiro como JSON
   const handleSendData = async () => {
     // Formata o userData antes de enviar
     const formattedUserData = {
       ...userData,
-      whatsapp: "+55" + userData.whatsapp.replace(/\D/g, ''), // Formato internacional
+      celular: "+55" + userData.celular, // Formato internacional
       alergias: userData.alergias.split(","), // Converte string em array
       preferencia: userData.preferencia.split(",") // Converte string em array
     };
